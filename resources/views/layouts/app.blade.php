@@ -24,10 +24,11 @@
     <div id="app">
 
         @include('admin.partials.header')
-        @include('admin.partials.aside')
-        @include('admin.partials.footer')
-    
-        @yield('content')
+        <div class="d-flex">
+            @include('admin.partials.aside')  
+            
+            @yield('content')
+        </div>
     </div>
 </body>
 

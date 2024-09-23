@@ -1,1 +1,1 @@
-<header>FOOTER</header>
+<footer class="container-fluid">FOOTER</footer>
