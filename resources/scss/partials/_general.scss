@@ -12,8 +12,15 @@ header, aside{
 }
 .main-wrapped{
     height: calc(100vh - 56px);
+    overflow: hidden;
+    
 }
 aside{
     width: 150px;
     height: 100%;
+   
+}
+.content{
+    overflow: auto;
+    width: calc(100% - 150px);
 }
