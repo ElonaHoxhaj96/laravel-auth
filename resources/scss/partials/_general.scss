@@ -10,7 +10,10 @@ header, aside{
         list-style: none;
     }
 }
-
+.main-wrapped{
+    height: calc(100vh - 56px);
+}
 aside{
     width: 150px;
+    height: 100%;
 }
