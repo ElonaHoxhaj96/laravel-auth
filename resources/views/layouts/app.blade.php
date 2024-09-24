@@ -23,8 +23,9 @@
 
 <body>
     <div id="app">
-
-        @include('admin.partials.header')
+        @auth
+            @include('admin.partials.header')
+        @endauth
         <div class="d-flex main-wrapped">
             @include('admin.partials.aside')  
 
