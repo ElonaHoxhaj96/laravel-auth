@@ -3,34 +3,40 @@
 @section('content')
 <div class="container my-5">
    <h1>Add New Comics</h1>
-   @if ($errors->any())
-       <div class="alert alert-danger">
-           <ul>
-            @foreach($errors->all() as $error)
-                <li>{{$error}}</li>
-            @endforeach
-           </ul>
+   
+   <form action="{{ route('admin.posts.store') }}" method="POST">
+       @csrf
+       <div class="mb-3">
+           <label for="title" class="form-label">Titolo</label>
+           <input type="text" class="form-control @error('title') is-invalid @enderror" id="title" name="title" placeholder="inserisci il titolo" value="{{ old('title') }}">
+           @error('title')
+              <small class="text-danger">
+                  {{ $message }}
+              </small>
+           @enderror
+       </div>  
+       <div class="mb-3">
+           <label for="content" class="form-label">Contenuto</label>
+           <textarea class="form-control @error('txt') is-invalid @enderror" id="content" name="txt" placeholder="inserisci il contenuto">{{ old('txt') }}</textarea>
+           @error('txt')
+              <small class="text-danger">
+                  {{ $message }}
+              </small>
+           @enderror
        </div>
-   @endif
-   <form action="{{ route('admin.posts.store' )}}" method="POST">
-    @csrf
-    <div class="mb-3">
-        <label for="title" class="form-label">Titolo</label>
-        <input type="text" class="form-control" id="title" name="title" placeholder="inserisci il titolo">
-    </div> 
-    <div class="mb-3">
-        <label for="content" class="form-label">Contenuto</label>
-        <input type="content" class="form-control" id="content" name="txt" placeholder="inserisci il contenuto">
-    </div>
- 
-    <div class="mb-3">
-        <label for="reading_time" class="form-label">Tempo di lettura </label>
-        <input type="text" class="form-control" id="reading_time" name="reading_time" placeholder="inserisci il tempo di lettura">
-    </div>
-    <div class="mb-3">
-        <button type="submit" href="#" class="btn btn-success">Salva</button>
-    </div>
+      
+       <div class="mb-3">
+           <label for="reading_time" class="form-label">Tempo di lettura</label>
+           <input type="text" class="form-control @error('reading_time') is-invalid @enderror" id="reading_time" name="reading_time" placeholder="inserisci il tempo di lettura" value="{{ old('reading_time') }}">
+           @error('reading_time')
+              <small class="text-danger">
+                  {{ $message }}
+              </small>
+           @enderror
+       </div>
+       <div class="mb-3">
+           <button type="submit" class="btn btn-success">Salva</button>
+       </div>
    </form>
 </div>
-
 @endsection
