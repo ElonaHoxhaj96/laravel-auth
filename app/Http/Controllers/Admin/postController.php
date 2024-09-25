@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
+use App\Functions\Helper;
 
 class postController extends Controller
 {
@@ -22,7 +23,7 @@ class postController extends Controller
      */
     public function create()
     {
-        //
+       return view('admin.post.create');
     }
 
     /**
@@ -30,7 +31,14 @@ class postController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $data = $request->all();
+        $new_post = new Post();
+
+        $data['slug'] = Helper::generateSlug($data['title'], Post::class);
+        $new_post->fill($data);
+        $new_post->save();
+
+        return redirect()->route('admin.posts.show', ['posts' => $new_post->id]);
     }
 
     /**
@@ -38,7 +46,8 @@ class postController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $posts = Post::find($id);       
+        return view('admin.posts.show', compact('posts'));
     }
 
     /**
@@ -46,7 +55,8 @@ class postController extends Controller
      */
     public function edit(string $id)
     {
-        //
+        $posts = Post::find($id);
+        return view('admin.posts.edit', compact('posts'));
     }
 
     /**
@@ -54,7 +64,18 @@ class postController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        $data = $request->all();
+        $posts = Post::find($id);
+
+          //se il titolo cambia cambia lo slug altimenti mantengo il solito 
+          if($data['title'] == $posts->title){
+            $data['slug'] = $posts->slug;
+        }else{
+            $data['slug'] = Helper::generateSlug($data['title'], Post::class);
+        }
+
+        $posts->update($data);
+        return redirect()->route('admin.posts.show', $posts);
     }
 
     /**
@@ -62,6 +83,9 @@ class postController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $posts = Post::find($id);
+        $posts->delete();
+
+        return redirect()->route('admin.posts.index');
     }
 }

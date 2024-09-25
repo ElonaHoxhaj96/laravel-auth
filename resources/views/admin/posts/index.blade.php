@@ -19,14 +19,14 @@
                 <tr>
                     <td>{{$post->id}}</td>
                     <td>{{$post->title}}</td>
-                    <td>{{$post->created_at}}</td>
-                    <td>
+                    <td>{{( $post->created_at )->format('d/m/Y')}}</td>
+                    <td class="d-flex justify-content-between">
                         <a href="{{ route('admin.posts.show', ['post' => $post->id])}}" class="btn btn-primary">Dettagli</a>
                         <a href="{{ route('admin.posts.edit', ['post' => $post->id])}}" class="btn btn-info">Modifica</a>
-                        <form action="{{ route('admin.posts.destroy', ['post' => $post->id])}}" method="POST" class="btn btn-danger">
+                        <form action="{{ route('admin.posts.destroy', ['post' => $post->id])}}" method="POST">
                             @csrf
                             @method('DELETE')
-                            Elimina
+                            <input type="submit" value="Elimina" class=" btn btn-danger">
                         </form>
                         
                     </td>
