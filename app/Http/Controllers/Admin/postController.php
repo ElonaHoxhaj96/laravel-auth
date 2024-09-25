@@ -23,7 +23,7 @@ class postController extends Controller
      */
     public function create()
     {
-       return view('admin.post.create');
+       return view('admin.posts.create');
     }
 
     /**
@@ -38,7 +38,7 @@ class postController extends Controller
         $new_post->fill($data);
         $new_post->save();
 
-        return redirect()->route('admin.posts.show', ['posts' => $new_post->id]);
+        return redirect()->route('admin.posts.show', ['post' => $new_post->id]);
     }
 
     /**
