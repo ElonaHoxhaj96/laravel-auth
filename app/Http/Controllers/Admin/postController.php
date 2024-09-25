@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Post;
 use App\Functions\Helper;
+use App\Http\Requests\PostRequest;
+
 
 class postController extends Controller
 {
@@ -29,7 +31,7 @@ class postController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(PostRequest $request)
     {
         $data = $request->all();
         $new_post = new Post();
