@@ -5,6 +5,11 @@
     <h2 class="fs-4 text-secondary my-4">
         Elenco dei Post:
     </h2>
+    @if(session('delete'))
+      <div class="alert alert-danger">
+          {{session('delete')}}
+      </div>
+   @endif
     <table class="table table-striped">
         <thead>
             <tr>
@@ -23,14 +28,12 @@
                     <td class="d-flex justify-content-between">
                         <a href="{{ route('admin.posts.show', ['post' => $post->id])}}" class="btn btn-primary">Dettagli</a>
                         <a href="{{ route('admin.posts.edit', ['post' => $post->id])}}" class="btn btn-info">Modifica</a>
-                        <form action="{{ route('admin.posts.destroy', ['post' => $post->id])}}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <input type="submit" value="Elimina" class=" btn btn-danger">
-                        </form>
-                        
+                       @include('admin.partials.formdelete', [
+                        'route' => route('admin.posts.destroy', $post),
+                        'message' => 'Sei sicuro di voler eliminare il post' . $post->title . '?'
+                       ])
                     </td>
-                 
+                                    
                 </tr>
             @endforeach
         </tbody>
@@ -38,3 +41,4 @@
    {{$posts->links()}}
 </div>
 @endsection
+

@@ -6,7 +6,13 @@
     <ul class="list-group list-group-flush">
         <li class="list-group-item">
         <div class="card-body">
-            <h5 class="card-title">Titolo: {{$posts->title}} <a class="btn btn-warning" href="{{route('admin.posts.edit', $posts)}}" title="modifica" ><i class="fa-solid fa-pen-to-square"></i></a>
+            <h5 class="card-title">Titolo: {{$posts->title}} 
+                <a class="btn btn-warning" href="{{route('admin.posts.edit', $posts)}}" title="modifica" ><i class="fa-solid fa-pen-to-square"></i>
+                </a>
+                @include('admin.partials.formdelete', [
+                        'route' => route('admin.posts.destroy', $posts),
+                        'message' => 'Sei sicuro di voler eliminare il post' . $posts->title . '?'
+                       ])
             </h5>
         </div>
         </li>

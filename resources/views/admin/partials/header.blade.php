@@ -6,8 +6,8 @@
         <div>
             <ul class="navbar">
                 @guest
-                    <li class="nav-item pe-3"><a href="{{route('login')}}"></a>Login</li>
-                    <li class="nav-item"><a href="{{route('register')}}"></a>Registrati</li>
+                    <li class="nav-item pe-3"><a href="{{ route('login') }}"></a>Login</li>
+                    <li class="nav-item"><a href="{{ route('register' )}}"></a>Registrati</li>
                 @else
                     <li class="nav-item dropdown">
                         <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>

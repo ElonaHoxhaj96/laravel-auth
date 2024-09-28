@@ -1,1 +1,0 @@
-<footer class="container-fluid">FOOTER</footer>
